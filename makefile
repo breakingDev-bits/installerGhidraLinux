@@ -2,7 +2,7 @@
 NIM_SOURCE = main.nim
 OUTPUT_BIN = binary/ghidra-installer
 
-nimCommand = c -d:danger --mm:arc --opt:size -o:$(OUTPUT_BIN) 
+nimCommand = c -d:danger --mm:arc -d:ssl --opt:speed -o:$(OUTPUT_BIN) 
 
 build:
 	nim $(nimCommand) $(NIM_SOURCE)
