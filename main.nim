@@ -80,7 +80,7 @@ proc checkJava(): bool =
     let javaVersion = execProcess("java -version")
     return javaVersion.len() > 0 
 
-proc NimMainC() = 
+proc NimMainC(): void = 
     echo "--- Install Ghidra for Linux ---"
 
     if not checkJava():
