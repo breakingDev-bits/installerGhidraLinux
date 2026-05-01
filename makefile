@@ -4,7 +4,7 @@ FOLDER_BIN = binary/
 OUTPUT_BIN = $(FOLDER_BIN)ghidra-installer
 
 # Compile flags
-NIM_FLAGS = c -d:danger --mm:arc -d:ssl --opt:speed -o:$(OUTPUT_BIN) 
+NIM_FLAGS = c -d:danger --mm:arc --opt:speed -o:$(OUTPUT_BIN) 
 
 build:
 	nim $(NIM_FLAGS) $(NIM_SOURCE)
