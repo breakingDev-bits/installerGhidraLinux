@@ -1,3 +1,6 @@
+{.passC: "-O2 -march=native -flto".}
+{.passL: "-flto -s".}
+
 import puppy, std/[strutils, json, os]
 import smalleTools
 import zippy/ziparchives

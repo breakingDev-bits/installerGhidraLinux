@@ -1,12 +1,14 @@
-# Настройки
+# Settings
 NIM_SOURCE = main.nim
-OUTPUT_BIN = binary/ghidra-installer
+FOLDER_BIN = binary/
+OUTPUT_BIN = $(FOLDER_BIN)ghidra-installer
 
-nimCommand = c -d:danger --mm:arc -d:ssl --opt:speed -o:$(OUTPUT_BIN) 
+# Compile flags
+NIM_FLAGS = c -d:danger --mm:arc -d:ssl --opt:speed -o:$(OUTPUT_BIN) 
 
 build:
-	nim $(nimCommand) $(NIM_SOURCE)
-	strip -s $(OUTPUT_BIN)
+	nim $(NIM_FLAGS) $(NIM_SOURCE)
+	mkdir -p $(FOLDER_BIN)
 	@echo "Build complete. Binary size:"
 	@du -h $(OUTPUT_BIN)
 
