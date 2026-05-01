@@ -1,5 +1,5 @@
 # Settings
-NIM_SOURCE = main.nim
+NIM_SOURCE = src/main.nim
 FOLDER_BIN = binary/
 OUTPUT_BIN = $(FOLDER_BIN)ghidra-installer
 
