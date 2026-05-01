@@ -1,4 +1,5 @@
-import puppy, std/[strutils, json, os, osproc, options]
+import puppy, std/[strutils, json, os]
+import smalleTools
 import zippy/ziparchives
 import strformat
 
@@ -45,7 +46,7 @@ proc installArchive(): string =
         echo "API Error: ", res.code
         return ""
 
-proc dearchive(nameArchive: string): string = 
+proc dearchive(nameArchive: string, installDir: string = getHomeDir() / ".ghidra"): string = 
     if nameArchive == "" or not fileExists(nameArchive):
         echo "Nothing to extract"
         return ""
@@ -65,26 +66,16 @@ proc dearchive(nameArchive: string): string =
 
         return ""
 
-
-proc findVersionFolder(installDir: string): Option[string] =
-  for kind, path in walkDir(installDir):
-    if kind == pcDir and path.startsWith("ghidra_"):
-      return some(path)
-  return none(string)
-
-proc errorInstaller(): void =
-    ## Only for two moments. Because Nim not have goto
-    echo "Installation failed during download"
-
-proc checkJava(): bool =
-    let javaVersion = execProcess("java -version")
-    return javaVersion.len() > 0 
-
 proc NimMainC(): void = 
     echo "--- Install Ghidra for Linux ---"
+    let installDir = getHomeDir() / ".ghidra"
 
     if not checkJava():
         echo "Error: don't found JDK, please install JDK."
+        quit(1)
+
+    if checkUpdates(installDir):
+        echo "Version found. Delete folder ~/.ghidra"
         quit(1)
     
     block mainLogic:
@@ -97,11 +88,13 @@ proc NimMainC(): void =
             break mainLogic
 
         let vFolder = findVersionFolder(installDir)
-        if vFolder.isNone: 
+        if findVersionFolder(installDir) == "":
+            echo fmt"Error: don't found installDir"
             break mainLogic
 
-        let versionPath = fmt"'{getHomeDir()}/.ghidra/{vFolder.get().lastPathPart}/ghidraRun'"
+        let versionPath = fmt"'{getHomeDir()}/.ghidra/{vFolder}/ghidraRun'"
         echo fmt"Add alias manually. Example: alias ghidra={versionPath}"
+        
         return 
 
     errorInstaller()
