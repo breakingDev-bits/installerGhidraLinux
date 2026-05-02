@@ -32,6 +32,9 @@ Extracting...
 Successfully extracted to /home/user/.ghidra
 Add alias manually. Example: alias ghidra='/home/user/.ghidra/ghidra_12.0.4_PUBLIC/ghidraRun'
 ```
+---
+# Requiments
+MakeFile, Nim 2.0>, puppy and zippy
 
 ---
 # Quick start
@@ -40,5 +43,3 @@ Add alias manually. Example: alias ghidra='/home/user/.ghidra/ghidra_12.0.4_PUBL
 make
 ./binary/ghidra-installer
 ```
-
-and that's all:3 (Only you need nim)
