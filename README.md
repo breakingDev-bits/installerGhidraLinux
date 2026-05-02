@@ -17,6 +17,23 @@ This project help install ghidra on Linux with `$HOME`.
 Only because of interest, I wanted a tool with no runtime dependencies (like Python or JVM). And `Nim` it's `easy C`. I believe Nim will become a better language, but and now it language is wonderful for me.
 
 ---
+# How work
+
+```bash
+user@user:~/Documents/... $ ./binary/ghidra-installer
+--- Install Ghidra for Linux ---
+Version found: /home/user/.ghidra/ghidra_12.0.4_PUBLIC
+Delete older version? (Y/n): Y
+Deleted: /home/user/.ghidra
+Download version: ghidra_12.0.4_PUBLIC_20260303.zip
+Starting download... Please wait (this may take a while)
+Writing to disk...
+Extracting...
+Successfully extracted to /home/user/.ghidra
+Add alias manually. Example: alias ghidra='/home/user/.ghidra/ghidra_12.0.4_PUBLIC/ghidraRun'
+```
+
+---
 # Quick start
 
 ```bash

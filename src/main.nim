@@ -9,7 +9,8 @@ import strformat
 proc installArchive(): string = 
     let res = get(
         "https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest",
-        headers = @[("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0")])
+        headers = @[("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"
+    )])
     # Check API github
     if res.code == 200:
         let data = parseJson(res.body)
@@ -58,7 +59,7 @@ proc dearchive(nameArchive: string, installDir: string = getHomeDir() / ".ghidra
     try:
 
         let installDir = getHomeDir() / ".ghidra"
-        createDir(installDir)
+        # createDir(installDir) Bug. Extraction error: Destination /home/user/.ghidra already exists
         extractAll(nameArchive, installDir)
         echo "Successfully extracted to " & installDir
         removeFile(nameArchive)
@@ -74,12 +75,11 @@ proc NimMainC(): void =
     let installDir = getHomeDir() / ".ghidra"
 
     if not checkJava():
-        echo "Error: don't found JDK, please install JDK."
+        echo "Error: JDK not found. Please install JDK (e.g., openjdk-17-jdk)."
         quit(1)
 
     if checkUpdates(installDir):
-        echo "Version found. Delete folder ~/.ghidra"
-        quit(1)
+        quit(0)
     
     block mainLogic:
         let nameArchive = installArchive()
@@ -92,10 +92,10 @@ proc NimMainC(): void =
 
         let vFolder = findVersionFolder(installDir)
         if findVersionFolder(installDir) == "":
-            echo fmt"Error: don't found installDir"
+            echo "Error: Could not find Ghidra folder after extraction."
             break mainLogic
 
-        let versionPath = fmt"'{getHomeDir()}/.ghidra/{vFolder}/ghidraRun'"
+        let versionPath = fmt"'{vFolder}/ghidraRun'"
         echo fmt"Add alias manually. Example: alias ghidra={versionPath}"
         
         return 
