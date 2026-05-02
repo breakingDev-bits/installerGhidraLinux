@@ -10,7 +10,7 @@ This project help install ghidra on Linux with `$HOME`.
 
 3. Zippy wonderful speed in extract power. 
 
-4. checkJava, checkVersion and alias. This tool only install, not updater or more. 
+4. checkJava, checkVersion and alias. This tool only install&update, not install JDK or more. 
 
 ## Why i do it? 
 
