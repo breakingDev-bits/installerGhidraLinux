@@ -1,5 +1,5 @@
 # Ghidra installer on NIM.
-![Built with Nim](https://shields.io)
+![Built with Nim](https://img.shields.io/badge/Built%20with-Nim-yellow)
 
 This project help install ghidra on Linux with `$HOME`.
 
@@ -37,9 +37,23 @@ Add alias manually. Example: alias ghidra='/home/user/.ghidra/ghidra_12.0.4_PUBL
 MakeFile, Nim 2.0>, puppy and zippy
 
 ---
+# Requirements
+Makefile, Nim>2.0, puppy and zippy
+
+---
 # Quick start
 
+create with source code(Check Requirements)
 ```bash
-make
+make buildForMe
 ./binary/ghidra-installer
 ```
+
+or
+
+```bash
+## One-line install (Linux, Binary)
+curl -s [https://api.github.com/repos/breakingDev-bits/installerGhidraLinux/releases/latest](https://api.github.com/repos/breakingDev-bits/installerGhidraLinux/releases/latest) | grep "browser_download_url" | cut -d '"' -f 4 | xargs curl -L -o ghidra-installer && chmod +x ghidra-installer && ./ghidra-installer
+```
+
+and that's all:3

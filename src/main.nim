@@ -1,5 +1,9 @@
-{.passC: "-O2 -march=native -flto".}
-{.passL: "-flto -s".}
+when defined(ForMe):
+    {.passC: "-O2 -march=native -flto".}
+    {.passL: "-flto -s".}
+else:
+    {.passC: "-O2 -flto".}
+    {.passL: "-flto -static -s".}
 
 import puppy, std/[strutils, json, os]
 import smalleTools
