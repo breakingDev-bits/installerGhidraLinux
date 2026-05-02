@@ -41,4 +41,4 @@ make
 ./binary/ghidra-installer
 ```
 
-and that's all:3
+and that's all:3 (Only you need nim)
